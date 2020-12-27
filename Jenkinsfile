@@ -32,7 +32,7 @@ pipeline {
     post {
         success {
             mail to: 'johne.vang1@gmail.com',
-            subject: "Successful jenkins build for Build Number: ${BUILD_NUMBER}",
+            subject: "Successful jenkins build for Build Number: ${BUILD_NUMBER}"
         }
         failure {
             echo 'failed'
