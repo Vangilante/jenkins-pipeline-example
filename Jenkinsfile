@@ -1,12 +1,25 @@
+import hudson.model.*
+import jenkins.model.Jenkins
+
 pipeline {
+
+    def buildNumber = ${env.BUILD_NUMBER}
+    def jenkinsURL = ${JENKINS_URL}
+    def jobName = ${env.JOB_NAME}
+
 
     agent { docker { image 'maven:3.3.3' } }
     stages {
         stage ('display environment vars') {
             steps {
-                echo "Bulid Number = ${env.BULID_NUMBER}"
-                echo "Job Name = ${env.JOB_NAME}"
-                echo "Build URL = ${JENKINS_URL}"
+                echo "Bulid Number = ${buildNumber}"
+                echo "Job Name = ${jobName}"
+                echo "Build URL = ${jenkinsURL}"
+            }
+        }
+        stage ('using jenkins core api') {
+            steps {
+                def job = Hudson.instance.getJob(jobName)
             }
         }
         stage('build') {
@@ -16,6 +29,10 @@ pipeline {
 	    }   
     }
     post {
+        success {
+            mail to: 'johne.vang1@gmail.com',
+            subject: "Successful jenkins build for Build Number: ${BUILD_NUMBER}",
+        }
         failure {
             echo 'failed'
             mail to: 'johne.vang1@gmail.com',
