@@ -20,6 +20,7 @@ pipeline {
         stage ('using jenkins core api') {
             steps {
                 def job = Hudson.instance.getJob(jobName)
+                
             }
         }
         stage('build') {
