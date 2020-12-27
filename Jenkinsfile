@@ -3,9 +3,11 @@ pipeline {
     agent { docker { image 'maven:3.3.3' } }
     stages {
         stage ('display environment vars') {
-            echo "Bulid Number = ${env.BULID_NUMBER}"
-            echo "Job Name = ${env.JOB_NAME}"
-            echo "Build URL = ${JENKINS_URL}"
+            steps {
+                echo "Bulid Number = ${env.BULID_NUMBER}"
+                echo "Job Name = ${env.JOB_NAME}"
+                echo "Build URL = ${JENKINS_URL}"
+            }
         }
         stage('build') {
             steps {
