@@ -22,6 +22,7 @@ pipeline {
                     def job = Jenkins.instance.getItemByFullName(jobName)
                     echo "print job: ${job.getFullName()}"
                     echo "checking dataType by calling getClass(): ${job.getClass()}"
+                    echo "get all properties: ${job.getAllProperties()}"
                 }   
             }
         }
