@@ -11,18 +11,18 @@ pipeline {
     stages {
         stage ('display environment vars') {
             steps {
-                echo "Bulid Number = ${buildNumber}"
-                echo "Job Name = ${jobName}"
-                echo "Build URL = ${jenkinsURL}"
+                sh 'echo "Bulid Number = ${buildNumber}"'
+                sh 'echo "Job Name = ${jobName}"'
+                sh 'echo "Build URL = ${jenkinsURL}"'
             }
         }
         stage ('using jenkins core api') {
             steps {
                 script {
                     def job = Jenkins.instance.getItemByFullName(jobName)
-                    echo "print job: ${job.getFullName()}"
-                    echo "checking dataType by calling getClass(): ${job.getClass()}"
-                    echo "get all properties: ${job.getAllProperties()}"
+                    sh 'echo "print job: ${job.getFullName()}"'
+                    sh 'echo "checking dataType by calling getClass(): ${job.getClass()}"'
+                    sh 'echo "get all properties: ${job.getAllProperties()}"'
                 }   
             }
         }
