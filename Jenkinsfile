@@ -19,7 +19,7 @@ pipeline {
         stage ('using jenkins core api') {
             steps {
                 script {
-                    def job = Hudson.instance.getJob(jobName)
+                    def job = Jenkins.instance.getItemByFullName(jobName)
                     echo "print job: ${job}"
                 }   
             }
