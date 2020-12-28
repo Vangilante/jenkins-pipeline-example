@@ -4,7 +4,7 @@ import jenkins.model.Jenkins
 
 def buildNumber = currentBuild.number
 def jenkinsURL = currentBuild.absoluteUrl
-def jobName = currentBuild.projectName
+def jobName = env.JOB_NAME
 
 pipeline {
     agent { docker { image 'maven:3.3.3' } }
