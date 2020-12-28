@@ -17,9 +17,11 @@ pipeline {
             }
         }
         stage ('using jenkins core api') {
-            script {
-                def job = Hudson.instance.getJob(jobName)
-                echo "print job: ${job}"
+            steps {
+                script {
+                    def job = Hudson.instance.getJob(jobName)
+                    echo "print job: ${job}"
+                }   
             }
         }
         stage('build') {
@@ -31,7 +33,8 @@ pipeline {
     post {
         success {
             mail to: 'johne.vang1@gmail.com',
-            subject: "Successful jenkins build for Build Number: ${BUILD_NUMBER}"
+            subject: "Successful jenkins build for Build Number: ${BUILD_NUMBER}",
+            body: "yay"
         }
         failure {
             echo 'failed'
