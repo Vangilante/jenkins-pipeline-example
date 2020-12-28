@@ -1,13 +1,12 @@
 import hudson.model.*
 import jenkins.model.Jenkins
 
+
+def buildNumber = ${env.BUILD_NUMBER}
+def jenkinsURL = ${JENKINS_URL}
+def jobName = ${env.JOB_NAME}
+
 pipeline {
-
-    def buildNumber = ${env.BUILD_NUMBER}
-    def jenkinsURL = ${JENKINS_URL}
-    def jobName = ${env.JOB_NAME}
-
-
     agent { docker { image 'maven:3.3.3' } }
     stages {
         stage ('display environment vars') {
@@ -18,9 +17,9 @@ pipeline {
             }
         }
         stage ('using jenkins core api') {
-            steps {
+            script {
                 def job = Hudson.instance.getJob(jobName)
-                
+                echo "print job: ${job}"
             }
         }
         stage('build') {
