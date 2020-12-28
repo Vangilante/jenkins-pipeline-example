@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     def job = Jenkins.instance.getItemByFullName(jobName)
-                    echo "print job: ${job}"
+                    echo "print job: ${job.getFullName()}"
                 }   
             }
         }
