@@ -9,6 +9,12 @@ def jobName = env.JOB_NAME
 pipeline {
     agent { docker { image 'maven:3.3.3' } }
     stages {
+        stage ('execute sh file') {
+            steps {
+                sh "cd folder"
+                sh "./hello-world.sh"
+            }
+        }
         stage ('display environment vars') {
             steps {
                 sh 'echo "Bulid Number = ${buildNumber}"'
