@@ -2,9 +2,9 @@ import hudson.model.*
 import jenkins.model.Jenkins
 
 
-def buildNumber = ${env.BUILD_NUMBER}
-def jenkinsURL = ${JENKINS_URL}
-def jobName = ${env.JOB_NAME}
+def buildNumber = currentBuild.number
+def jenkinsURL = currentBuild.absoluteUrl
+def jobName = currentBuild.projectName
 
 pipeline {
     agent { docker { image 'maven:3.3.3' } }
