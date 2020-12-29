@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage ('execute sh file') {
             steps {
-                sh "cd folder"
+                sh "cd ../folder"
                 sh "./hello-world.sh"
             }
         }
