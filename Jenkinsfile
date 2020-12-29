@@ -20,7 +20,7 @@ pipeline {
                             echo "caught error"
                             error = caughtError
                             currentBuild.result = "Failure"
-                            echo "${error}"
+                            echo "${error.printStackTrace()}"
                         }
                         finally {
                             if(error) {
