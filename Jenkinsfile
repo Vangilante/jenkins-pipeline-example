@@ -24,7 +24,7 @@ pipeline {
                         }
                         finally {
                             if(error) {
-                                throw err
+                                throw error
                             }
                         }
                     }
