@@ -7,13 +7,27 @@ def jenkinsURL = currentBuild.absoluteUrl
 def jobName = env.JOB_NAME
 
 pipeline {
-    try {
         agent { docker { image 'maven:3.3.3' } }
         stages {
             stage ('execute sh file') {
                 steps {
-                    sh "cd ../folder"
-                    sh "./hello-world.sh"
+                    script {
+                        try {
+                            sh "cd ../folder"
+                            sh "./hello-world.sh"
+                        }
+                        catch(caughtError) {
+                            echo "caught error"
+                            error = caughtError
+                            currentBuild.result = "Failure"
+                            echo "${error}"
+                        }
+                        finally {
+                            if(error) {
+                                throw err
+                            }
+                        }
+                    }
                 }
             }
             stage ('display environment vars') {
@@ -39,17 +53,7 @@ pipeline {
                 }   
             }   
         }
-    } catch(caughtError) {
-        echo "caught error"
-        error = caughtError
-        currentBuild.result = "Failure"
-        echo "${error}"
-    }
-    finally {
-        if(error) {
-            throw err
-        }
-    }
+    } 
     
 
     // post {
